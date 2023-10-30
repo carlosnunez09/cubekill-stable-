@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://squvbl0587ne"]
+
+[ext_resource type="Script" path="res://prefab/life_bullet.gd" id="1_bvhtu"]
+[ext_resource type="Texture2D" uid="uid://urskajopx8ms" path="res://char_assets/round_asset.png" id="1_ve23q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qty2x"]
+radius = 9.14286
+
+[node name="RigidBody2D" type="RigidBody2D"]
+scale = Vector2(0.4375, 0.4375)
+mass = 2.71
+inertia = 4.51
+gravity_scale = 0.0
+script = ExtResource("1_bvhtu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qty2x")
+
+[node name="RoundAsset" type="Sprite2D" parent="."]
+scale = Vector2(0.571429, 0.571428)
+texture = ExtResource("1_ve23q")
