@@ -18,7 +18,7 @@ config/icon="res://msic/icon.svg"
 [display]
 
 mouse_cursor/custom_image="res://cube_hallo.png"
-mouse_cursor/tooltip_position_offset=Vector2(5, 5)
+mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [importer_defaults]
 

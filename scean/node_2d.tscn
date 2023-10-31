@@ -2,10 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://dkvv8k85s5iad" path="res://char_assets/cube_halo-export.png" id="1_b13vk"]
 [ext_resource type="Script" path="res://code/Sprite2D.gd" id="2_kpnuc"]
-[ext_resource type="Script" path="res://scean/mouseTest.gd" id="3_6ur78"]
 [ext_resource type="Texture2D" uid="uid://kc4cqarq3e2" path="res://char_assets/cube.png" id="4_cp252"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb23e"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oul3v"]
 size = Vector2(32, 32)
 
 [node name="Node2D" type="Node2D"]
@@ -13,27 +15,29 @@ metadata/_edit_horizontal_guides_ = [-40.0]
 metadata/_edit_vertical_guides_ = [-236.0]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, 5)
-
-[node name="CubeHalo-export" type="Sprite2D" parent="."]
-position = Vector2(-102, -15)
-texture = ExtResource("1_b13vk")
-script = ExtResource("2_kpnuc")
-
-[node name="bulletpoint" type="Node2D" parent="CubeHalo-export"]
-position = Vector2(22, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-script = ExtResource("3_6ur78")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+visible = false
 mass = 2001.0
-inertia = 1.0
 gravity_scale = 0.0
-sleeping = true
+lock_rotation = true
+freeze = true
 
 [node name="Cube" type="Sprite2D" parent="RigidBody2D"]
 texture = ExtResource("4_cp252")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_tb23e")
+
+[node name="player" type="RigidBody2D" parent="."]
+script = ExtResource("2_kpnuc")
+
+[node name="bulletpoint" type="Node2D" parent="player"]
+
+[node name="CubeHalo-export" type="Sprite2D" parent="player"]
+texture = ExtResource("1_b13vk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource("RectangleShape2D_oul3v")
+
+[node name="Timer" type="Timer" parent="player"]
