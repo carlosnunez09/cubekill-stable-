@@ -46,12 +46,6 @@ func _physics_process(delta):
 	#var target_direction = mouse_pos_xy - position
 	#var rotation_angle = atan2(target_direction.y, target_direction.x)
 	#rotation = rotation_angle
-	
-	
-	
-	
-	
-	
 	pass
 
 
