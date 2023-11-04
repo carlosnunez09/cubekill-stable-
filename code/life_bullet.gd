@@ -3,6 +3,14 @@ extends RigidBody2D
 var lifespan = 4.0  # Adjust this to set the bullet's lifespan in seconds
 var time_to_live = lifespan
 
+func _ready():
+	var rng = RandomNumberGenerator.new()
+	self.modulate = Color(rng.randf_range(0.4, 1), rng.randf_range(0.4, 1), rng.randf_range(0.4, 1))
+
+	#print(Color(rng.randf_range(0.4, 1), rng.randf_range(0.4, 1), rng.randf_range(0.4, 1)))
+	print("e")
+	return
+
 func _process(delta):
 	time_to_live -= delta
 

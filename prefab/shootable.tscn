@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://squvbl0587ne"]
 
-[ext_resource type="Script" path="res://prefab/life_bullet.gd" id="1_bvhtu"]
+[ext_resource type="Script" path="res://code/life_bullet.gd" id="1_siyrj"]
 [ext_resource type="Texture2D" uid="uid://urskajopx8ms" path="res://char_assets/round_asset.png" id="1_ve23q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6aalg"]
@@ -11,12 +11,12 @@ radius = 9.14286
 
 [node name="RigidBody2D" type="RigidBody2D"]
 scale = Vector2(0.873, 0.873)
-mass = 2.71
-inertia = 4.51
+mass = 0.01
+inertia = 1.3
 physics_material_override = SubResource("PhysicsMaterial_6aalg")
 gravity_scale = 0.0
 contact_monitor = true
-script = ExtResource("1_bvhtu")
+script = ExtResource("1_siyrj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.381, 0.381)
