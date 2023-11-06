@@ -17,3 +17,5 @@ position = Vector2(19.91, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b6wkm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

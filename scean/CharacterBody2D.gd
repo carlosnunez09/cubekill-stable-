@@ -49,7 +49,6 @@ func _shooting():
 		bullet_ins.apply_impulse(Vector2(cos(rotation), sin(rotation)) * shoot_velocity, Vector2())
 		#bullet_ins.script = script_bullet
 		get_tree().get_root().add_child(bullet_ins)
-		print(bullet_ins.script)
 		can_fire = false
 		await get_tree().create_timer(fire_rate).timeout
 		can_fire = true

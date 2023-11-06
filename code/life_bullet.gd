@@ -7,8 +7,7 @@ func _ready():
 	var rng = RandomNumberGenerator.new()
 	self.modulate = Color(rng.randf_range(0.4, 1), rng.randf_range(0.4, 1), rng.randf_range(0.4, 1))
 
-	#print(Color(rng.randf_range(0.4, 1), rng.randf_range(0.4, 1), rng.randf_range(0.4, 1)))
-	print("e")
+	#print(Color(rng.randf_range(0.4, 1), rng.randf_range(0.4, 1), rng.randf_range(0.4, 1))
 	return
 
 func _process(delta):

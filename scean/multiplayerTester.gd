@@ -19,18 +19,29 @@ func PlayerConnected(id):
 	
 #this gets called on the server and cleint
 func PlayerDisconnected(id):
-	print("player disconnected" + id)
+	print("player disconnected" + str(id))
 #called only from clients
 func connected_to_server(id):
-	print("player connected to server!" + id)
+	print("player connected to server!" + str(id))
 	
 #called only from clients
 func connection_failed(id):
 	print("player failed to connect " + id)
 
 
+@rpc("any_peer","call_local")
+func StartGame():
+	var scean = load("res://scean/main_tester.tscn").instantiate()
+	get_tree().root.add_child(scean)
+	self.hide()
+	
+	
+	pass
+
+
 
 func _on_start_button_down():
+	StartGame.rpc()
 	pass
 	
 	
