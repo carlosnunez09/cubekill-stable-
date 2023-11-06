@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b42rwgsskhiso"]
+[gd_scene load_steps=5 format=3 uid="uid://b42rwgsskhiso"]
 
 [ext_resource type="Script" path="res://scean/CharacterBody2D.gd" id="1_7mw64"]
 [ext_resource type="Texture2D" uid="uid://dkvv8k85s5iad" path="res://char_assets/cube_halo-export.png" id="1_c6lyv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6wkm"]
 size = Vector2(32, 32)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tqdkd"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_7mw64")
@@ -19,3 +25,4 @@ position = Vector2(19.91, 0)
 shape = SubResource("RectangleShape2D_b6wkm")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_tqdkd")
