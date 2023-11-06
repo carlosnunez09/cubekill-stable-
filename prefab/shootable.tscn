@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://squvbl0587ne"]
+[gd_scene load_steps=6 format=3 uid="uid://squvbl0587ne"]
 
 [ext_resource type="Script" path="res://code/life_bullet.gd" id="1_siyrj"]
 [ext_resource type="Texture2D" uid="uid://urskajopx8ms" path="res://char_assets/round_asset.png" id="1_ve23q"]
@@ -8,6 +8,8 @@ bounce = 0.25
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qty2x"]
 radius = 9.14286
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_70exp"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
 scale = Vector2(0.873, 0.873)
@@ -25,3 +27,6 @@ shape = SubResource("CircleShape2D_qty2x")
 [node name="RoundAsset" type="Sprite2D" parent="."]
 scale = Vector2(0.381, 0.381)
 texture = ExtResource("1_ve23q")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_70exp")

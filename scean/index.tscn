@@ -76,6 +76,18 @@ text = "host
 "
 flat = true
 
+[node name="name" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.121
+anchor_top = 0.292
+anchor_right = 0.207
+anchor_bottom = 0.34
+offset_left = -0.392014
+offset_top = -0.216019
+offset_right = -0.46402
+offset_bottom = -0.320007
+
 [connection signal="button_down" from="Start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="join" to="." method="_on_join_button_down"]
 [connection signal="button_down" from="Host" to="." method="_on_host_button_down"]

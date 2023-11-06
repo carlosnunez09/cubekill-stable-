@@ -13,7 +13,9 @@ absorbent = true
 size = Vector2(32, 32)
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(28, -31)
 script = ExtResource("1_iqdtb")
+PlayerScene = ExtResource("5_kog20")
 metadata/_edit_horizontal_guides_ = [-40.0]
 metadata/_edit_vertical_guides_ = [-236.0]
 
@@ -25,10 +27,12 @@ texture = ExtResource("2_6a6uh")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-mass = 5.25
+mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_xardg")
 gravity_scale = 0.0
 can_sleep = false
+lock_rotation = true
+freeze = true
 freeze_mode = 1
 
 [node name="Cube" type="Sprite2D" parent="RigidBody2D"]
@@ -37,5 +41,10 @@ texture = ExtResource("2_6a6uh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_tb23e")
 
-[node name="player2" parent="." instance=ExtResource("5_kog20")]
-position = Vector2(-120, -14)
+[node name="Spawn" type="Node" parent="."]
+
+[node name="0" type="Node2D" parent="Spawn" groups=["playerSpawnPoint"]]
+position = Vector2(462, -146)
+
+[node name="1" type="Node2D" parent="Spawn" groups=["playerSpawnPoint"]]
+position = Vector2(-438, 134)
