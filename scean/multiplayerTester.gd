@@ -1,6 +1,6 @@
 extends Control
 
-@export var Address = "172.31.16.203"
+@export var Address = "100.107.94.61"
 @export var port = 8910
 var peer
 # Called when the node enters the scene tree for the first time.
@@ -11,6 +11,8 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	if "--server" in OS.get_cmdline_args():
+		print(Address)
+		print(IP.get_local_addresses())
 		hostGame()
 	
 	pass
@@ -79,7 +81,7 @@ func hostGame():
 
 func _on_host_button_down():
 	hostGame()
-	sendPlayerInformation($name.text,multiplayer.get_unique_id())
+	#sendPlayerInformation($name.text,multiplayer.get_unique_id())
 	pass # Replace with function body.
 
 

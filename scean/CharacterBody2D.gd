@@ -26,18 +26,14 @@ func get_input():
 	return input.normalized()
 	
 func _physics_process(delta):
-	player_movemnet(delta)
-	look_at(get_global_mouse_position())
-	if Input.is_action_pressed("fire") and can_fire:
-		#can_fire = false
-		#await get_tree().create_timer(fire_rate).timeout
-		#can_fire = true
-		_shooting.rpc()
-		pass
-	
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		player_movemnet(delta)
+		look_at(get_global_mouse_position())
+		if Input.is_action_pressed("fire") and can_fire:
+			_shooting.rpc()
 
 func player_movemnet(delta):
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	
 		input = get_input()
 		
 		if input == Vector2.ZERO:
@@ -53,7 +49,7 @@ func player_movemnet(delta):
 	
 @rpc("any_peer","call_local")
 func _shooting():
-	#if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	
 		
 	var bullet_ins = projectile_scene.instantiate()
 	bullet_ins.position = $bulletpoint.global_position
