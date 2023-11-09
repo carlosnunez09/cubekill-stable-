@@ -21,15 +21,18 @@ func _ready():
 #peer connected
 func PlayerConnected(id):
 	print("player connected" + str(id))
-	sendPlayerInformation.rpc_id(1,$name.text, multiplayer.get_unique_id())
-
+	
+	
 	
 #peer connected
 func PlayerDisconnected(id):
 	print("player disconnected" + str(id))
+	
 #called only from clients
 func connected_to_server(id):
 	print("player connected to server!" + str(id))
+	sendPlayerInformation.rpc_id(1,$name.text, multiplayer.get_unique_id())
+	
 	
 	
 	
@@ -45,11 +48,6 @@ func sendPlayerInformation(name, id):
 			"id" : id,
 			"score": 0
 		}
-	if multiplayer.is_server():
-		for i in GameManager.Player:
-			sendPlayerInformation.rpc(GameManager.Player[i].name,i)
-
-
 
 @rpc("any_peer","call_local")
 func StartGame():

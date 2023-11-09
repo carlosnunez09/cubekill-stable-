@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://b42rwgsskhiso"]
 
-[ext_resource type="Script" path="res://scean/CharacterBody2D.gd" id="1_7mw64"]
 [ext_resource type="Texture2D" uid="uid://dkvv8k85s5iad" path="res://char_assets/cube_halo-export.png" id="1_c6lyv"]
+[ext_resource type="Script" path="res://code/CharacterBody2D.gd" id="1_l7v2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6wkm"]
 size = Vector2(32, 32)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tqdkd"]
 properties/0/path = NodePath(".:position")
-properties/0/spawn = true
+properties/0/spawn = false
 properties/0/sync = true
 properties/0/watch = false
 properties/1/path = NodePath(".:rotation")
@@ -17,7 +17,7 @@ properties/1/sync = true
 properties/1/watch = false
 
 [node name="player" type="CharacterBody2D"]
-script = ExtResource("1_7mw64")
+script = ExtResource("1_l7v2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_c6lyv")

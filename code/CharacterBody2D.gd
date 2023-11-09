@@ -50,7 +50,7 @@ func player_movemnet(delta):
 @rpc("any_peer","call_local")
 func _shooting():
 	
-		
+	
 	var bullet_ins = projectile_scene.instantiate()
 	bullet_ins.position = $bulletpoint.global_position
 	bullet_ins.rotation_degrees = rotation
