@@ -3,18 +3,19 @@
 [sub_resource type="GDScript" id="GDScript_pys78"]
 script/source = "extends Control
 
-@export var Address = \"54.172.223.122\"
+@export var Address = \"54.152.248.168\"
+
 @export var port = 8910
 var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 # Function that gets called when the button is pressed.
 	multiplayer.peer_connected.connect(PlayerConnected)
 	multiplayer.peer_disconnected.connect(PlayerDisconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	if \"--server\" in OS.get_cmdline_args():
-		print(Address)
 		print(IP.get_local_addresses())
 		hostGame()
 	
@@ -45,18 +46,18 @@ func connection_failed(id):
 
 @rpc(\"any_peer\")
 func sendPlayerInformation(name, id):
-	if!GameManager.Player.has(id):
+	if not GameManager.Player.has(id):
 		GameManager.Player[id] = {
-			\"name\" : name,
-			\"id\" : id,
-			\"score\": 0
+			\"name\": name,
+			\"id\": id,
+			\"score\": 0,
+			\"in_game\": 0  # Added flag for in-game status
 		}
 	if multiplayer.is_server():
 		for i in GameManager.Player:
-			sendPlayerInformation.rpc(GameManager.Player[i].name,i)
+			var player_info = GameManager.Player[i]
+			sendPlayerInformation.rpc(player_info.name, i)
 			
-
-
 #@rpc(\"any_peer\")
 func removeGamemanagerItem(id):
 	if!GameManager.Player.has(id):
