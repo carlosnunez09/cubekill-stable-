@@ -1,6 +1,6 @@
 extends Control
 
-@export var Address = "100.107.94.61"
+@export var Address = "54.152.248.168"
 @export var port = 8910
 var peer
 # Called when the node enters the scene tree for the first time.
@@ -44,6 +44,7 @@ func sendPlayerInformation(name, id):
 			"name" : name,
 			"id" : id,
 			"score": 0
+			#make score -1 to id that we are in game, reader will use a +1
 		}
 	if multiplayer.is_server():
 		for i in GameManager.Player:

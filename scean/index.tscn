@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dne3qs05hqslr"]
+[gd_scene load_steps=4 format=3 uid="uid://dne3qs05hqslr"]
 
 [ext_resource type="Script" path="res://scean/multiplayerTester.gd" id="1_3unvo"]
+[ext_resource type="Texture2D" uid="uid://kc4cqarq3e2" path="res://char_assets/cube.png" id="2_4huhj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_optsr"]
 
@@ -12,22 +13,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3unvo")
+metadata/_edit_horizontal_guides_ = [311.0]
 
-[node name="Label" type="Label" parent="."]
+[node name="loby" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.463
+anchor_top = 0.5
+anchor_right = 0.726
+anchor_bottom = 0.5
+offset_left = -533.376
+offset_top = -324.0
+offset_right = -796.352
+offset_bottom = -284.0
+
+[node name="player2" type="Label" parent="loby"]
+layout_mode = 0
+offset_left = 791.0
+offset_top = 306.0
+offset_right = 857.0
+offset_bottom = 332.0
+text = "wating 2"
+
+[node name="player2_id" type="Sprite2D" parent="loby/player2"]
+position = Vector2(30.9999, 72)
+scale = Vector2(2.40625, 2.40625)
+texture = ExtResource("2_4huhj")
+
+[node name="player1" type="Label" parent="loby"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.241
-anchor_top = 0.037
-anchor_right = 0.753
-anchor_bottom = 0.355
-offset_left = 0.367981
-offset_top = 0.0240002
-offset_right = 532.512
-offset_bottom = 183.128
-theme_override_font_sizes/font_size = 148
-text = "cube kill"
+anchor_left = 13.125
+anchor_top = 7.775
+anchor_right = 14.775
+anchor_bottom = 8.425
+offset_left = -6.10352e-05
+offset_top = -3.05176e-05
+text = "wating 1"
 
-[node name="Start" type="Button" parent="."]
+[node name="player2_skin" type="Sprite2D" parent="loby/player1"]
+position = Vector2(27, 67)
+scale = Vector2(2.40625, 2.40625)
+texture = ExtResource("2_4huhj")
+
+[node name="index" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="index"]
 material = SubResource("CanvasItemMaterial_optsr")
 custom_minimum_size = Vector2(-0.45, 0)
 layout_mode = 1
@@ -36,58 +69,72 @@ anchor_left = 0.023
 anchor_top = 0.378
 anchor_right = 0.121
 anchor_bottom = 0.489
-offset_left = -0.496
-offset_top = 0.0559998
-offset_right = -0.392014
-offset_bottom = 0.127991
+offset_left = 25.08
+offset_top = 229.88
+offset_right = 134.16
+offset_bottom = 297.44
 pivot_offset = Vector2(2, 0)
 theme_override_font_sizes/font_size = 46
 text = "start"
 flat = true
 
-[node name="join" type="Button" parent="."]
+[node name="join" type="Button" parent="index"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.029
 anchor_top = 0.472
 anchor_right = 0.108
 anchor_bottom = 0.583
-offset_left = -0.408001
-offset_top = 0.143982
-offset_right = -0.416
-offset_bottom = 0.216003
+offset_left = 31.84
+offset_top = 287.12
+offset_right = 119.68
+offset_bottom = 354.68
 theme_override_font_sizes/font_size = 46
 text = "join"
 flat = true
 
-[node name="Host" type="Button" parent="."]
+[node name="Host" type="Button" parent="index"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.031
 anchor_top = 0.577
 anchor_right = 0.122
 anchor_bottom = 0.688
-offset_left = 0.287998
-offset_top = 0.103973
-offset_right = 0.455994
-offset_bottom = 0.175995
+offset_left = 34.76
+offset_top = 350.92
+offset_right = 136.12
+offset_bottom = 418.48
 theme_override_font_sizes/font_size = 46
 text = "host
 "
 flat = true
 
-[node name="name" type="LineEdit" parent="."]
+[node name="name" type="LineEdit" parent="index"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.121
 anchor_top = 0.292
 anchor_right = 0.207
 anchor_bottom = 0.34
-offset_left = -0.392014
-offset_top = -0.216019
-offset_right = -0.46402
-offset_bottom = -0.320007
+offset_left = 134.16
+offset_top = 177.32
+offset_right = 197.782
+offset_bottom = 206.4
 
-[connection signal="button_down" from="Start" to="." method="_on_start_button_down"]
-[connection signal="button_down" from="join" to="." method="_on_join_button_down"]
-[connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.241
+anchor_top = 0.037
+anchor_right = 0.753
+anchor_bottom = 0.355
+offset_left = 0.368011
+offset_top = 0.0240002
+offset_right = 569.888
+offset_bottom = 193.304
+theme_override_font_sizes/font_size = 148
+text = "cube kill"
+
+[connection signal="button_down" from="index/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="index/join" to="." method="_on_join_button_down"]
+[connection signal="button_down" from="index/Host" to="." method="_on_host_button_down"]
