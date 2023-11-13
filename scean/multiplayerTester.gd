@@ -2,8 +2,8 @@ extends Control
 
 @export var Address = "54.152.248.168"
 @export var port = 8910
+
 var peer
-# Called when the node enters the scene tree for the first time.
 func _ready():
 # Function that gets called when the button is pressed.
 	multiplayer.peer_connected.connect(PlayerConnected)
@@ -44,7 +44,7 @@ func sendPlayerInformation(name, id):
 			"name" : name,
 			"id" : id,
 			"score": 0
-			#make score -1 to id that we are in game, reader will use a +1
+			#used to id in game
 		}
 	if multiplayer.is_server():
 		for i in GameManager.Player:
@@ -54,9 +54,16 @@ func sendPlayerInformation(name, id):
 
 @rpc("any_peer","call_local")
 func StartGame():
-	var scean = load("res://scean/main_tester.tscn").instantiate()
-	get_tree().root.add_child(scean)
-	self.hide()
+	
+	#find index and hide it
+	#find loby and unhide it
+	
+	#make player1 label = this.name
+	#find a player2 with 0 for score
+	#if player2 with score 0 found make my score 1
+	#if non found set waitng
+	#send place 1 for all items
+	
 	pass
 
 func _on_start_button_down():
