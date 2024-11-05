@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b42rwgsskhiso"]
 
-[ext_resource type="Script" path="res://scean/CharacterBody2D.gd" id="1_7mw64"]
+[ext_resource type="Script" path="res://code/CharacterBody2D.gd" id="1_7mw64"]
 [ext_resource type="Texture2D" uid="uid://dkvv8k85s5iad" path="res://char_assets/cube_halo-export.png" id="1_c6lyv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6wkm"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpr77acvkxhv5"]
+
+[ext_resource type="Script" path="res://code/clientSideTest.gd" id="1_s0cnt"]
+
+[node name="serverTest" type="Node2D"]
+script = ExtResource("1_s0cnt")
+
+[node name="send" type="Button" parent="."]
+offset_left = 44.0
+offset_top = 270.0
+offset_right = 186.0
+offset_bottom = 349.0
+
+[node name="start" type="Button" parent="."]
+offset_left = 386.0
+offset_top = 226.0
+offset_right = 766.0
+offset_bottom = 423.0
+text = "test"
+
+[node name="Inline" type="LineEdit" parent="."]
+offset_left = 252.0
+offset_top = 175.0
+offset_right = 319.063
+offset_bottom = 206.0
+
+[connection signal="pressed" from="send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
