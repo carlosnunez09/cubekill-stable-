@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://b42rwgsskhiso"]
+
+[ext_resource type="Texture2D" uid="uid://dkvv8k85s5iad" path="res://char_assets/cube_halo-export.png" id="1_c6lyv"]
+[ext_resource type="Script" path="res://code/CharacterBody2D.gd" id="1_l7v2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6wkm"]
+size = Vector2(32, 32)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tqdkd"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = false
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(1.06, 0.6)
+disable_mode = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_l7v2u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.45098, 0.47451, 0.564706, 1)
+texture = ExtResource("1_c6lyv")
+
+[node name="bulletpoint" type="Node2D" parent="."]
+position = Vector2(19.91, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b6wkm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_tqdkd")

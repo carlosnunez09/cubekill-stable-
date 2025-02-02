@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://x3kb0tq8y0sg"]
+
+[ext_resource type="PackedScene" uid="uid://b42rwgsskhiso" path="res://prefab/player.tscn" id="1_jbsaq"]
+
+[node name="RigidBody2D2" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="player" parent="." instance=ExtResource("1_jbsaq")]
+position = Vector2(0, 0)

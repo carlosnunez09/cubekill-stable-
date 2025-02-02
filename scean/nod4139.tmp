@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://p22ig83c31ch"]
+
+[ext_resource type="Texture2D" uid="uid://dkvv8k85s5iad" path="res://char_assets/cube_halo-export.png" id="1_b13vk"]
+[ext_resource type="Script" path="res://code/Sprite2D.gd" id="2_kpnuc"]
+[ext_resource type="Texture2D" uid="uid://urskajopx8ms" path="res://char_assets/round_asset.png" id="3_ycnrg"]
+[ext_resource type="Script" path="res://code/mouse.gd" id="4_ty6vj"]
+
+[node name="Node2D" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-40.0]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 5)
+
+[node name="CubeHalo-export" type="Sprite2D" parent="."]
+position = Vector2(-102, -15)
+texture = ExtResource("1_b13vk")
+script = ExtResource("2_kpnuc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 108.0
+offset_top = 88.0
+offset_right = 148.0
+offset_bottom = 128.0
+script = ExtResource("4_ty6vj")
+
+[node name="RoundAsset" type="Sprite2D" parent="Control"]
+texture = ExtResource("3_ycnrg")
