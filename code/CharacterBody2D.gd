@@ -14,12 +14,42 @@ var fire_rate = 0.1
 var can_fire = true
 var projectile_scene = preload("res://prefab/shootable.tscn")
 
+var regenRate = 0.9
+var regen = false
+var staminaTimer = 0.0
+var staminaMax = 20
+var staminaCost = 0.1
+var staminaCollDownMax = 10
 
+
+
+
+
+func _process(delta):
+	#i want to make the stamina bar regen over time if has not been used for a x amount of time use regen as a false true, remove time from stamina timer and samina max is ow long the timer si
+
+	#check if is owner with if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+
+	
+	if not regen:
+		staminaTimer -= delta
+		if staminaTimer <= 0:
+			regen = true
+	else:
+		if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+			var stamina_bar = self.get_parent().get_node("CanvasLayer/stamina/moveable")
+			#incresse stamina until it reaches max
+			if stamina_bar.scale.x < staminaMax:
+				stamina_bar.scale.x = min(stamina_bar.scale.x + delta * regenRate, staminaMax)
+	#if regenTimer at a certim point tunr regen to true
+
+
+		
 
 func _ready():
 	print("Printing the scene tree:")
 	print_tree()
-	#$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	pass
 
 
@@ -35,6 +65,14 @@ func _physics_process(delta):
 		look_at(get_global_mouse_position())
 		if Input.is_action_pressed("fire") and can_fire:
 			_shooting.rpc()
+		var collision = move_and_collide(velocity* delta)
+		if collision:
+			var collided_object = collision.get_collider()
+			if collided_object and collided_object.has_method("getId"):  # Ensure it has getId()
+				print("Collided with:", collided_object.getId())
+				
+				
+	
 
 func player_movemnet(delta):
 	
@@ -53,27 +91,27 @@ func player_movemnet(delta):
 	
 @rpc("any_peer","call_local")
 func _shooting():
-	var stamina = self.get_parent().get_node("CanvasLayer/stamina/moveable") #move up
-	if(stamina.scale.x <= 0.1):
+	var stamina_bar = self.get_parent().get_node("CanvasLayer/stamina/moveable") #move up
+	
+	if stamina_bar.scale.x >= staminaCost and $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		stamina_bar.scale.x -= staminaCost
+		staminaTimer = staminaCollDownMax
+		regen = false
+		#reset timer
+	if stamina_bar.scale.x < staminaCost:
 		return
-	
-
-	
-	if stamina:
-		stamina.scale.x -= 0.1
-	else:
-		print("Stamina node not found!")
-	#reset timer
 	var bullet_ins = projectile_scene.instantiate()
 	bullet_ins.position = $bulletpoint.global_position
 	bullet_ins.rotation_degrees = rotation
+	bullet_ins.id_Player = multiplayer.get_unique_id() 
 	bullet_ins.apply_impulse(Vector2(cos(rotation), sin(rotation)) * shoot_velocity, Vector2())
 		#bullet_ins.script = script_bullet
 	get_tree().get_root().add_child(bullet_ins)
 	#can_fire = false
 	#await get_tree().create_timer(fire_rate).timeout
 	#can_fire = true
-		
 	return
+	
+	
 	
 	

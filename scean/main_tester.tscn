@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://p22ig83c31ch"]
+[gd_scene load_steps=8 format=3 uid="uid://p22ig83c31ch"]
 
 [ext_resource type="Script" path="res://code/misc_adjust.gd" id="1_iqdtb"]
 [ext_resource type="Texture2D" uid="uid://kc4cqarq3e2" path="res://char_assets/cube.png" id="2_6a6uh"]
 [ext_resource type="PackedScene" uid="uid://x3kb0tq8y0sg" path="res://prefab/rigid_body_2d_2.tscn" id="4_p6yyu"]
+[ext_resource type="PackedScene" uid="uid://ck6acgc1vj3r1" path="res://prefab/canvas_layer.tscn" id="5_bu7jj"]
 [ext_resource type="PackedScene" uid="uid://b42rwgsskhiso" path="res://prefab/player.tscn" id="5_kog20"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xardg"]
@@ -28,6 +29,7 @@ texture = ExtResource("2_6a6uh")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+visible = false
 mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_xardg")
 gravity_scale = 0.0
@@ -51,3 +53,6 @@ position = Vector2(462, -146)
 position = Vector2(-438, 134)
 
 [node name="RigidBody2D2" parent="." instance=ExtResource("4_p6yyu")]
+visible = false
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_bu7jj")]

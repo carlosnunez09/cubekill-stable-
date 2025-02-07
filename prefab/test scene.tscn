@@ -1,33 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8toc4h4vwfkg"]
 
+[ext_resource type="PackedScene" uid="uid://ck6acgc1vj3r1" path="res://prefab/canvas_layer.tscn" id="1_6dlag"]
 [ext_resource type="Texture2D" uid="uid://b6v7stneenhst" path="res://export/index.apple-touch-icon.png" id="1_42ni5"]
 [ext_resource type="PackedScene" uid="uid://b42rwgsskhiso" path="res://prefab/player.tscn" id="3_0yfi5"]
-[ext_resource type="Texture2D" uid="uid://kc4cqarq3e2" path="res://char_assets/cube.png" id="3_i52ei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uicp"]
 size = Vector2(164, 172)
 
 [node name="testscene" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_scale = 4.595
-
-[node name="stamina" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="placeholder" type="Sprite2D" parent="CanvasLayer/stamina"]
-position = Vector2(585, 614)
-scale = Vector2(20, 1.181)
-texture = ExtResource("3_i52ei")
-
-[node name="moveable" type="Sprite2D" parent="CanvasLayer/stamina"]
-modulate = Color(0.168627, 0.458824, 0.592157, 1)
-position = Vector2(585, 614)
-scale = Vector2(20, 1.181)
-texture = ExtResource("3_i52ei")
+[node name="CanvasLayer" parent="." instance=ExtResource("1_6dlag")]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(683, 262)

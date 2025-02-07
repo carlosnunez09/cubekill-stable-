@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck6acgc1vj3r1"]
+
+[ext_resource type="Texture2D" uid="uid://kc4cqarq3e2" path="res://char_assets/cube.png" id="1_i2wws"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+follow_viewport_scale = 4.595
+
+[node name="stamina" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="placeholder" type="Sprite2D" parent="stamina"]
+position = Vector2(585, 614)
+scale = Vector2(20, 1.181)
+texture = ExtResource("1_i2wws")
+
+[node name="moveable" type="Sprite2D" parent="stamina"]
+modulate = Color(0.168627, 0.458824, 0.592157, 1)
+position = Vector2(585, 614)
+scale = Vector2(20, 1.181)
+texture = ExtResource("1_i2wws")
