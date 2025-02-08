@@ -70,6 +70,10 @@ func _physics_process(delta):
 			var collided_object = collision.get_collider()
 			if collided_object and collided_object.has_method("getId"):  # Ensure it has getId()
 				print("Collided with:", collided_object.getId())
+				if(collided_object.getId() == multiplayer.get_unique_id()):
+					print("you hit got hit by ", collided_object.getId())
+					#make sure to add to the gamemanager points to opposite side
+					return
 				
 				
 	

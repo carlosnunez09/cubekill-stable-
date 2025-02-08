@@ -29,7 +29,6 @@ texture = ExtResource("2_6a6uh")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-visible = false
 mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_xardg")
 gravity_scale = 0.0
@@ -39,6 +38,7 @@ freeze = true
 freeze_mode = 1
 
 [node name="Cube" type="Sprite2D" parent="RigidBody2D"]
+modulate = Color(0.45098, 0.298039, 0.4, 1)
 texture = ExtResource("2_6a6uh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
@@ -56,3 +56,10 @@ position = Vector2(-438, 134)
 visible = false
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5_bu7jj")]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 856.0
+offset_top = 538.0
+offset_right = 896.0
+offset_bottom = 564.0
+text = "0"
