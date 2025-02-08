@@ -9,7 +9,7 @@ script/source = "extends Control
 var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	print(\"old\")
 # Function that gets called when the button is pressed.
 	multiplayer.peer_connected.connect(PlayerConnected)
 	multiplayer.peer_disconnected.connect(PlayerDisconnected)
@@ -86,6 +86,7 @@ func _on_start_button_down():
 #compress_fastLZ
 func hostGame():
 	var peer = ENetMultiplayerPeer.new()
+	peer.set_bind_ip(Address)
 	var error = peer.create_server(port,4)
 	if error != OK:
 		print(\"canno  host: \" +  str(error))
