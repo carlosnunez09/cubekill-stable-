@@ -64,7 +64,12 @@ func _physics_process(delta):
 		player_movemnet(delta)
 		look_at(get_global_mouse_position())
 		if Input.is_action_pressed("fire") and can_fire:
-			_shooting.rpc()
+			var stamina_bar = self.get_parent().get_node("CanvasLayer/stamina/moveable") #move up
+			if stamina_bar.scale.x >= staminaCost:
+				stamina_bar.scale.x -= staminaCost
+				staminaTimer = staminaCollDownMax
+				regen = false
+				_shooting.rpc() # Only call RPC if stamina is sufficient
 		var collision = move_and_collide(velocity* delta)
 		if collision:
 			var collided_object = collision.get_collider()
@@ -95,15 +100,7 @@ func player_movemnet(delta):
 	
 @rpc("any_peer","call_local")
 func _shooting():
-	var stamina_bar = self.get_parent().get_node("CanvasLayer/stamina/moveable") #move up
-	
-	if stamina_bar.scale.x >= staminaCost and $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		stamina_bar.scale.x -= staminaCost
-		staminaTimer = staminaCollDownMax
-		regen = false
-		#reset timer
-	if stamina_bar.scale.x < staminaCost:
-		return
+
 	var bullet_ins = projectile_scene.instantiate()
 	bullet_ins.position = $bulletpoint.global_position
 	bullet_ins.rotation_degrees = rotation
