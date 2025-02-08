@@ -1,41 +1,23 @@
 extends Control
 
-@export var Address = "127.0.0.1"
+@export var address = "127.0.0.1"
+
 @export var port = 8910
 var peer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
 # Function that gets called when the button is pressed.
 	multiplayer.peer_connected.connect(PlayerConnected)
 	multiplayer.peer_disconnected.connect(PlayerDisconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
-	print("#########
-		   ######### 0.018")
-	# Check for command-line arguments
-	var args = OS.get_cmdline_args()
-	if "--server" in args:
-		# Look for the --port argument and get the value after it
-		var port_index = args.find("--port") 
-		if port_index != -1 and port_index + 1 < args.size():
-			port = int(args[port_index + 1])  # Get the next argument and use it as the port
-			print("Port set to: " + str(port))
-		else:
-			print("Using default port: " + str(port))
-
-		print("Server Address: " + Address)
-		print("Local Addresses: " + str(IP.get_local_addresses()))
-		
-		var customIP_index = args.find("--ip")
-		if customIP_index != -1 and customIP_index + 1 < args.size():
-			Address = args[customIP_index + 1]
-			print("Custom IP set to: " + Address)
-		else:
-			print("using default IP Address: " + Address)
-			
-	print("Server Address: " + Address)
-	print("Local Addresses: " + str(IP.get_local_addresses()))
-
+	if "--server" in OS.get_cmdline_args():
+		print(IP.get_local_addresses())
+		hostGame()
+	
+	pass
 
 #peer connected
 func PlayerConnected(id):
@@ -85,6 +67,7 @@ func _on_start_button_down():
 #compress_fastLZ
 func hostGame():
 	var peer = ENetMultiplayerPeer.new()
+	peer.set_bind_ip(address)
 	var error = peer.create_server(port,4)
 	if error != OK:
 		print("canno  host: " +  str(error))
@@ -106,7 +89,7 @@ func _on_host_button_down():
 
 func _on_join_button_down():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(Address,port)
+	peer.create_client(address,port)
 	peer.get_host().compress(ENetConnection.COMPRESS_FASTLZ)
 	multiplayer.set_multiplayer_peer(peer)
 	pass # Replace with function body.
