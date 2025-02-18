@@ -6,11 +6,20 @@
 script/source = "extends Control
 
 @export var Address = \"127.0.0.1\"
+#set to 0.0.0.0 for server aws build
 
 @export var port = 8910
 var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	# Parse command-line arguments
+	var args = OS.get_cmdline_args()
+	if \"--port\" in args:
+		var port_index = args.find(\"--port\")
+		# Ensure there's a value following the flag
+		if port_index != -1 and port_index + 1 < args.size():
+			port = int(args[port_index + 1])
 
 # Function that gets called when the button is pressed.
 	multiplayer.peer_connected.connect(PlayerConnected)
@@ -18,6 +27,7 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	if \"--server\" in OS.get_cmdline_args():
+		print(port)
 		print(IP.get_local_addresses())
 		hostGame()
 	
