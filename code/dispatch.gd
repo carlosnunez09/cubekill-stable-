@@ -1,55 +1,30 @@
 extends Node
 
-const INSTANCE_MANAGER_URL = "http://localhost:808/api/join"
-var http_request : HTTPRequest
+@onready var http_request: HTTPRequest = $HTTPRequest
+
+
 
 func _ready():
-	request_instance()
+	test_dispatch()
 
-func request_instance():
-	http_request = HTTPRequest.new()
-	add_child(http_request)
-	http_request.request_completed.connect(self._on_request_completed)
+
+func test_dispatch():
+	http_request.request_completed.connect(_on_request_completed)
+	var url = "http://localhost:808/api/join"
+	var error = http_request.request(url)
 	
-	var error = http_request.request(INSTANCE_MANAGER_URL)
 	if error != OK:
-		print("Failed to create HTTP request")
-		http_request.queue_free()
+		print("Failed to send request to instance manager.")
 
-func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+func _on_request_completed(result, response_code, headers, body):
 	if response_code == 200:
-		var json = JSON.new()
-		var parse_error = json.parse(body.get_string_from_utf8())
-		
-		if parse_error == OK:
-			var response_data = json.get_data()
-			var lobby_id = generate_uuid()
-			
+		var data = JSON.parse_string(body.get_string_from_utf8())
+		if data:
 			print("Successfully joined lobby:")
-			print("Lobby ID: ", lobby_id)
-			print("Instance Port: ", response_data.get("port", "N/A"))
-			print("Instance ID: ", response_data.get("instance_id", "N/A"))
+			print("Instance Port:", data.get("port", "Unknown"))
+			print("Instance ID:", data.get("instance_id", "Unknown"))
 		else:
-			print("Failed to parse JSON response")
+			print("Failed to parse response.")
 	else:
-		print("Failed to join instance. Status code: ", response_code)
-	
-	if http_request != null:
-		http_request.queue_free()
-
-func generate_uuid() -> String:
-	var uuid := ""
-	var hex_chars := "0123456789abcdef"
-	
-	for i in 36:
-		match i:
-			8, 13, 18, 23:
-				uuid += "-"
-			14:
-				uuid += "4"
-			19:
-				uuid += hex_chars[(randi() % 4) + 8]
-			_:
-				uuid += hex_chars[randi() % 16]
-	
-	return uuid
+		print("Failed to join instance. Status code:", response_code)
+		
