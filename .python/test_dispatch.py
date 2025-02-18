@@ -4,7 +4,7 @@ import uuid
 def test_dispatch():
     # Request to join an instance from the instance manager
     try:
-        response = requests.get("http://localhost:808/api/join")
+        response = requests.get("http://13.59.246.75:808//api/join")
         if response.status_code == 200:
             data = response.json()
             lobby_id = str(uuid.uuid4())  # Generate a unique lobby ID
