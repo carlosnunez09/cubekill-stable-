@@ -54,7 +54,7 @@ class InstanceManager:
 
         # Build the command to start the game instance
         cmd = [
-            '/mnt/c/Users/carlo/Desktop/cubekill-stable--main/export/linux/linux.x86_64',
+            '/home/ec2-user/linux/linux.x86_64',
             '--server', '--headless', '--port', str(instance_port)
         ]
         try:
