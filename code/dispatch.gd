@@ -8,6 +8,7 @@ func _ready():
 	test_dispatch()
 
 
+
 func test_dispatch():
 	http_request.request_completed.connect(_on_request_completed)
 	var url = "http://localhost:808/api/join"
