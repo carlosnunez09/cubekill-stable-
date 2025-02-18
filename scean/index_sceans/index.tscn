@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dne3qs05hqslr"]
+[gd_scene load_steps=4 format=3 uid="uid://dne3qs05hqslr"]
+
+[ext_resource type="Script" path="res://code/dispatch.gd" id="1_b30ff"]
 
 [sub_resource type="GDScript" id="GDScript_pys78"]
 script/source = "extends Control
@@ -204,6 +206,11 @@ offset_left = 389.608
 offset_top = 36.784
 offset_right = 389.536
 offset_bottom = 36.68
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_b30ff")
 
 [connection signal="button_down" from="Start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="join" to="." method="_on_join_button_down"]
