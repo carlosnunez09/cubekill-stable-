@@ -436,7 +436,7 @@ class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     try:
-        with socketserver.TCPServer(("", PORT), MyRequestHandler) as httpd:
+        with socketserver.TCPServer(("0.0.0.0", PORT), MyRequestHandler) as httpd:
             logging.info(f"Server running at http://localhost:{PORT}")
             httpd.serve_forever()
     except KeyboardInterrupt:
