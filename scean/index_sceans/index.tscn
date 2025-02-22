@@ -52,7 +52,7 @@ func PlayerConnected(id):
 func PlayerDisconnected(id):
 	print(\"player disconnected\")
 	#removeGamemanagerItem.rpc_id(1,id)
-	s
+	
 	
 #called only from clients
 func connected_to_server(id):
@@ -154,8 +154,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_pys78")
-Address = null
-port = null
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
