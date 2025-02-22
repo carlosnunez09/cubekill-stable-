@@ -40,6 +40,18 @@ class InstanceManager:
                 self._cleanup_instance(instance_data)
                 break
 
+            if "player disconnected" in decoded_line:
+                logging.info(
+                    f"Instance {instance_id} on port {instance_port} disconnected: {decoded_line.strip()}"
+                )
+                process.terminate()
+                process.wait()
+                self._cleanup_instance(instance_data)
+                break
+
+
+
+               
     def start_new_instance(self):
         """Start a new game instance and return its ID and port."""
         with self.lock:
@@ -299,20 +311,25 @@ class MyRequestHandler(http.server.SimpleHTTPRequestHandler):
         elif path == "/api/join":
             instance_id, instance_port = instance_manager.join_instance()
             if instance_id is None:
+                error_response = json.dumps({"error": "Failed to join instance"}).encode('utf-8')
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(error_response)))  # Critical fix
                 self.end_headers()
-                self.wfile.write(json.dumps({"error": "Failed to join instance"}).encode())
+                self.wfile.write(error_response)
             else:
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json")
-                self.end_headers()
-                response = json.dumps({
+                success_response = json.dumps({
                     "instance_id": instance_id,
                     "port": instance_port
-                })
-                self.wfile.write(response.encode())
-        
+                }).encode('utf-8')  # Encode once and reuse
+                
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(success_response)))  # Add Content-Length
+                self.end_headers()
+                self.wfile.write(success_response)
+                self.wfile.flush()  # Force immediate send
+                
         elif path == "/refresh":
             # Return only the dynamic HTML body for AJAX polling
             body = instance_manager.generate_html_body()

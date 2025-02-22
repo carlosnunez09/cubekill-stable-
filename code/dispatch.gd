@@ -1,16 +1,16 @@
 extends Node
 
-@onready var http_request: HTTPRequest = $HTTPRequest
-
+@export var http_request: HTTPRequest
+var port
 
 
 func _ready():
-	test_dispatch()
+	return
 
 
 func test_dispatch():
 	http_request.request_completed.connect(_on_request_completed)
-	var url = "http://localhost:808/api/join"
+	var url = "http://13.59.141.187:808/api/join"
 	var error = http_request.request(url)
 	
 	if error != OK:
@@ -23,6 +23,7 @@ func _on_request_completed(result, response_code, headers, body):
 			print("Successfully joined lobby:")
 			print("Instance Port:", data.get("port", "Unknown"))
 			print("Instance ID:", data.get("instance_id", "Unknown"))
+			port = data.get("port", "Unknown")
 		else:
 			print("Failed to parse response.")
 	else:
